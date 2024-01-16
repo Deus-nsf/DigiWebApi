@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DigiWebApi.RoutesAndCRUD.Controllers;
 
-
-[Route("api/[controller]")]
+// [controller]/[action] pour pouvoir avoir les noms des routes automatiquement
+[Route("api/[controller]/[action]")]	
 [ApiController]
 public class BaguetteController : ControllerBase
 {
@@ -21,12 +21,12 @@ public class BaguetteController : ControllerBase
 	}
 
 
-	[HttpPost]
+	[HttpPost/*(nameof(Post))*/]
 	public async Task<IActionResult> Post(Baguette baguette)
 	{
 		try
 		{
-			await _baguetteService.AddBaguette(baguette);
+			await _baguetteService.AddAsync(baguette);
 		}
 		catch (Exception ex)
 		{
@@ -37,10 +37,10 @@ public class BaguetteController : ControllerBase
 	}
 
 
-	[HttpGet(nameof(GetAll))]
+	[HttpGet/*(nameof(GetAll))*/]
 	public async Task<IActionResult> GetAll()
 	{
-		List<Baguette> baguettes = await _baguetteService.GetAllBaguettes();
+		List<Baguette> baguettes = await _baguetteService.GetAllAsync();
 
 		if (baguettes.Count <= 0)
 			return BadRequest($"Aucune baguette en base de donnée !");
@@ -49,10 +49,10 @@ public class BaguetteController : ControllerBase
 	}
 
 
-	[HttpGet(nameof(Search))]
+	[HttpGet/*(nameof(Search))*/("{name}")]
 	public async Task<IActionResult> Search(string name)
 	{
-		List<Baguette> baguettes = await _baguetteService.GetAllBaguettesLikeName(name);
+		List<Baguette> baguettes = await _baguetteService.GetAllLikeNameAsync(name);
 
 		if (baguettes.Count <= 0)
 			return BadRequest($"Aucune baguette contenant le nom {name}.");
@@ -60,11 +60,12 @@ public class BaguetteController : ControllerBase
 			return Ok(baguettes);
 	}
 
-
-	[HttpGet(nameof(GetById))]
+	// "{id}" pour passer en route
+	// des parametres plus proprement genre GetById/12 pour l'element 12
+	[HttpGet/*(nameof(GetById))*/("{id}")]
 	public async Task<IActionResult> GetById(int id)
 	{
-		Baguette? baguette = await _baguetteService.GetBaguetteById(id);
+		Baguette? baguette = await _baguetteService.GetByIdAsync(id);
 
 		if (baguette is null)
 			return BadRequest($"Aucune baguette à l'identifiant {id}.");
@@ -73,12 +74,12 @@ public class BaguetteController : ControllerBase
 	}
 
 
-	[HttpPut(nameof(Put))]
+	[HttpPut/*(nameof(Put))*/]
 	public async Task<IActionResult> Put(Baguette baguette)
 	{
 		try
 		{
-			await _baguetteService.UpdateBaguette(baguette);
+			await _baguetteService.UpdateAsync(baguette);
 		}
 		catch (Exception ex)
 		{
@@ -89,12 +90,12 @@ public class BaguetteController : ControllerBase
 	}
 
 
-	[HttpDelete(nameof(Delete))]
+	[HttpDelete/*(nameof(Delete))*/("{id}")]
 	public async Task<IActionResult> Delete(int id)
 	{
 		try
 		{
-			await _baguetteService.DeleteBaguette(id);
+			await _baguetteService.DeleteAsync(id);
 		}
 		catch (Exception ex)
 		{

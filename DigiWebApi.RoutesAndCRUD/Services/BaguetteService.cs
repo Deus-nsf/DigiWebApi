@@ -19,7 +19,7 @@ public class BaguetteService
 	/// </summary>
 	/// <param name="baguette"></param>
 	/// <returns></returns>
-	public async Task AddBaguette(Baguette baguette)
+	public async Task AddAsync(Baguette baguette)
 	{
 		await _baguetteRepository.AddBaguetteAsync(baguette);
 	}
@@ -28,7 +28,7 @@ public class BaguetteService
 	/// GetAll
 	/// </summary>
 	/// <returns></returns>
-	public async Task<List<Baguette>> GetAllBaguettes()
+	public async Task<List<Baguette>> GetAllAsync()
 	{
 		return await _baguetteRepository.GetAllBaguettesAsync();
 	}
@@ -38,7 +38,7 @@ public class BaguetteService
 	/// </summary>
 	/// <param name="name"></param>
 	/// <returns></returns>
-	public async Task<List<Baguette>> GetAllBaguettesLikeName(string name)
+	public async Task<List<Baguette>> GetAllLikeNameAsync(string name)
 	{
 		return await _baguetteRepository.GetAllBaguettesLikeNameAsync(name);
 	}
@@ -48,7 +48,7 @@ public class BaguetteService
 	/// </summary>
 	/// <param name="id"></param>
 	/// <returns></returns>
-	public async Task<Baguette?> GetBaguetteById(int id)
+	public async Task<Baguette?> GetByIdAsync(int id)
 	{
 		return await _baguetteRepository.GetBaguetteByIdAsync(id);
 	}
@@ -58,7 +58,7 @@ public class BaguetteService
 	/// </summary>
 	/// <param name="baguette"></param>
 	/// <returns></returns>
-	public async Task UpdateBaguette(Baguette baguette)
+	public async Task UpdateAsync(Baguette baguette)
 	{
 		await _baguetteRepository.UpdateBaguetteAsync(baguette);
 	}
@@ -68,7 +68,7 @@ public class BaguetteService
 	/// </summary>
 	/// <param name="id"></param>
 	/// <returns></returns>
-	public async Task DeleteBaguette(int id)
+	public async Task DeleteAsync(int id)
 	{
 		await _baguetteRepository.DeleteBaguetteAsync(id);
 	}
