@@ -39,7 +39,7 @@ public class BaguetteController : ControllerBase
 		{
 			return BadRequest(ex.Message);
 		}
-		
+
 		return Ok(baguette);
 	}
 
@@ -55,12 +55,14 @@ public class BaguetteController : ControllerBase
 		{
 			return BadRequest(ex.Message);
 		}
-		
+
 		return Ok(baguetteDto);
 	}
 
 
 	[HttpGet]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status204NoContent)]
 	public async Task<IActionResult> GetAll()
 	{
 		List<Baguette> baguettes = await _baguetteService.GetAllAsync();
@@ -73,24 +75,30 @@ public class BaguetteController : ControllerBase
 
 
 	[HttpGet]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status204NoContent)]
 	public async Task<IActionResult> GetAllDTO()
 	{
 		List<GetAllBaguetteDTO> baguettes = await _baguetteService.GetAllDTOAsync();
 
 		if (baguettes.Count <= 0)
-			return NotFound($"Aucune baguette en base de donnée !");
+			return NoContent();
+		//return NotFound($"Aucune baguette en base de donnée !");
 		else
 			return Ok(baguettes);
 	}
 
 
 	[HttpGet("{name}")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status204NoContent)]
 	public async Task<IActionResult> Search(string name)
 	{
 		List<Baguette> baguettes = await _baguetteService.GetAllLikeNameAsync(name);
 
 		if (baguettes.Count <= 0)
-			return NotFound($"Aucune baguette contenant le nom {name}.");
+			return NoContent();
+		//return NotFound($"Aucune baguette contenant le nom {name}.");
 		else
 			return Ok(baguettes);
 	}
@@ -98,12 +106,15 @@ public class BaguetteController : ControllerBase
 	// "{id}" pour passer en route
 	// des parametres plus proprement genre GetById/12 pour l'element 12
 	[HttpGet("{id}")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status204NoContent)]
 	public async Task<IActionResult> GetById(int id)
 	{
 		Baguette? baguette = await _baguetteService.GetByIdAsync(id);
 
 		if (baguette is null)
-			return NotFound($"Aucune baguette à l'identifiant {id}.");
+			return NoContent();
+		//return NotFound($"Aucune baguette à l'identifiant {id}.");
 		else
 			return Ok(baguette);
 	}
@@ -124,7 +135,7 @@ public class BaguetteController : ControllerBase
 		//{
 		//	return BadRequest(ex.Message);
 		//}
-		
+
 		return Ok($"La baguette à l'identifiant {baguette.Id} à été mise à jour.");
 	}
 
@@ -144,7 +155,7 @@ public class BaguetteController : ControllerBase
 		//{
 		//	return BadRequest(ex.Message);
 		//}
-		
+
 		return Ok($"La baguette à l'identifiant {id} à été supprimée.");
 	}
 }

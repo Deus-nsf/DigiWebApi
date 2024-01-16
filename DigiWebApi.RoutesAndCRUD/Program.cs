@@ -6,6 +6,8 @@ using DigiWebApi.RoutesAndCRUD.Repositories.Contracts;
 using DigiWebApi.RoutesAndCRUD.Services;
 using DigiWebApi.RoutesAndCRUD.Services.Contracts;
 
+using Microsoft.Extensions.Options;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,13 @@ builder.Services.AddScoped<IBaguetteService, BaguetteService>();
 //{
 //	o.CreateMap<GetAllBaguetteDTO, Baguette>();
 //	o.CreateMap<Baguette, GetAllBaguetteDTO>();
+//});
+//builder.Services.AddCors(options =>
+//{
+//	options.AddDefaultPolicy(builder =>
+//	{
+//		builder.WithOrigins("*")/*.AllowAnyHeader().AllowAnyMethod()*/;
+//	});
 //});
 
 var app = builder.Build();

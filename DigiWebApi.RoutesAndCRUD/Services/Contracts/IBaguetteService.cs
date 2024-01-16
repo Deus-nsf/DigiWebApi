@@ -17,9 +17,9 @@ public interface IBaguetteService
 	/// <summary>
 	/// PostDTO
 	/// </summary>
-	/// <param name="baguette"></param>
+	/// <param name="postBaguetteDTO"></param>
 	/// <returns></returns>
-	public Task AddDTOAsync(PostBaguetteDTO baguette);
+	public Task AddDTOAsync(PostBaguetteDTO postBaguetteDTO);
 
 	/// <summary>
 	/// GetAll
