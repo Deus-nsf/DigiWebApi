@@ -1,5 +1,6 @@
 ﻿using DigiWebApi.RoutesAndCRUD.Context;
 using DigiWebApi.RoutesAndCRUD.Models;
+using DigiWebApi.RoutesAndCRUD.Repositories.Contracts;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace DigiWebApi.RoutesAndCRUD.Repositories;
 
 
-public class BaguetteRepository
+public class BaguetteRepository : IBaguetteRepository
 {
 	private readonly BakeryDbContext _context = new();
 

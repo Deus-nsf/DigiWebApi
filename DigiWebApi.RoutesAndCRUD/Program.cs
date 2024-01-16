@@ -1,6 +1,8 @@
 using DigiWebApi.RoutesAndCRUD.Context;
 using DigiWebApi.RoutesAndCRUD.Repositories;
+using DigiWebApi.RoutesAndCRUD.Repositories.Contracts;
 using DigiWebApi.RoutesAndCRUD.Services;
+using DigiWebApi.RoutesAndCRUD.Services.Contracts;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,8 +15,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BakeryDbContext>();
-builder.Services.AddScoped<BaguetteRepository>();
-builder.Services.AddScoped<BaguetteService>();
+builder.Services.AddScoped<IBaguetteRepository, BaguetteRepository>();
+builder.Services.AddScoped<IBaguetteService, BaguetteService>();
 
 var app = builder.Build();
 
