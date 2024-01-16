@@ -1,6 +1,7 @@
 ﻿using System.Data.Common;
 
 using DigiWebApi.RoutesAndCRUD.Context;
+using DigiWebApi.RoutesAndCRUD.DTOs;
 using DigiWebApi.RoutesAndCRUD.Models;
 using DigiWebApi.RoutesAndCRUD.Repositories;
 using DigiWebApi.RoutesAndCRUD.Services;
@@ -20,6 +21,7 @@ namespace DigiWebApi.RoutesAndCRUD.Controllers;
 public class BaguetteController : ControllerBase
 {
 	private readonly IBaguetteService _baguetteService;
+	// Penser à l'injection de dépendance de l'auto mapper
 	public BaguetteController(IBaguetteService baguetteService)
 	{
 		_baguetteService = baguetteService;
@@ -42,10 +44,38 @@ public class BaguetteController : ControllerBase
 	}
 
 
+	[HttpPost]
+	public async Task<IActionResult> PostDTO(PostBaguetteDTO baguetteDto)
+	{
+		try
+		{
+			await _baguetteService.AddDTOAsync(baguetteDto);
+		}
+		catch (Exception ex)
+		{
+			return BadRequest(ex.Message);
+		}
+		
+		return Ok(baguetteDto);
+	}
+
+
 	[HttpGet]
 	public async Task<IActionResult> GetAll()
 	{
 		List<Baguette> baguettes = await _baguetteService.GetAllAsync();
+
+		if (baguettes.Count <= 0)
+			return NotFound($"Aucune baguette en base de donnée !");
+		else
+			return Ok(baguettes);
+	}
+
+
+	[HttpGet]
+	public async Task<IActionResult> GetAllDTO()
+	{
+		List<GetAllBaguetteDTO> baguettes = await _baguetteService.GetAllDTOAsync();
 
 		if (baguettes.Count <= 0)
 			return NotFound($"Aucune baguette en base de donnée !");

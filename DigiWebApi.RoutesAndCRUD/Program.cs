@@ -1,4 +1,6 @@
 using DigiWebApi.RoutesAndCRUD.Context;
+using DigiWebApi.RoutesAndCRUD.DTOs;
+using DigiWebApi.RoutesAndCRUD.Models;
 using DigiWebApi.RoutesAndCRUD.Repositories;
 using DigiWebApi.RoutesAndCRUD.Repositories.Contracts;
 using DigiWebApi.RoutesAndCRUD.Services;
@@ -17,6 +19,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BakeryDbContext>();
 builder.Services.AddScoped<IBaguetteRepository, BaguetteRepository>();
 builder.Services.AddScoped<IBaguetteService, BaguetteService>();
+//builder.Services.AddAutoMapper(o =>
+//{
+//	o.CreateMap<GetAllBaguetteDTO, Baguette>();
+//	o.CreateMap<Baguette, GetAllBaguetteDTO>();
+//});
 
 var app = builder.Build();
 

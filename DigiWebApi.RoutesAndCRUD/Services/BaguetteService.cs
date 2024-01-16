@@ -1,4 +1,5 @@
-﻿using DigiWebApi.RoutesAndCRUD.Models;
+﻿using DigiWebApi.RoutesAndCRUD.DTOs;
+using DigiWebApi.RoutesAndCRUD.Models;
 using DigiWebApi.RoutesAndCRUD.Repositories;
 using DigiWebApi.RoutesAndCRUD.Repositories.Contracts;
 using DigiWebApi.RoutesAndCRUD.Services.Contracts;
@@ -24,9 +25,45 @@ public class BaguetteService : IBaguetteService
 	}
 
 
+	public async Task AddDTOAsync(PostBaguetteDTO baguetteDto)
+	{
+		Baguette baguette = new Baguette()
+		{
+			Name = baguetteDto.Name,
+			Description = baguetteDto.Description,
+			Price = baguetteDto.Price
+		};
+
+		await _baguetteRepository.AddBaguetteAsync(baguette);
+	}
+
+
 	public async Task<List<Baguette>> GetAllAsync()
 	{
 		return await _baguetteRepository.GetAllBaguettesAsync();
+	}
+
+
+	public async Task<List<GetAllBaguetteDTO>> GetAllDTOAsync()
+	{
+		List<Baguette> baguettes = await _baguetteRepository.GetAllBaguettesAsync();
+		List<GetAllBaguetteDTO> getAllBaguetteDTOs = new();
+
+        foreach (Baguette baguette in baguettes)
+        {
+			getAllBaguetteDTOs.Add
+			(
+				new GetAllBaguetteDTO()
+				{
+					Id = baguette.Id,
+					Name = baguette.Name,
+					Price = baguette.Price,
+					Description = baguette.Description
+				}
+			);
+        }
+
+        return getAllBaguetteDTOs;
 	}
 
 

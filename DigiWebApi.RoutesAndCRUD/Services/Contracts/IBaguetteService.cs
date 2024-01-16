@@ -1,6 +1,9 @@
-﻿using DigiWebApi.RoutesAndCRUD.Models;
+﻿using DigiWebApi.RoutesAndCRUD.DTOs;
+using DigiWebApi.RoutesAndCRUD.Models;
+
 
 namespace DigiWebApi.RoutesAndCRUD.Services.Contracts;
+
 
 public interface IBaguetteService
 {
@@ -12,10 +15,23 @@ public interface IBaguetteService
 	public Task AddAsync(Baguette baguette);
 
 	/// <summary>
+	/// PostDTO
+	/// </summary>
+	/// <param name="baguette"></param>
+	/// <returns></returns>
+	public Task AddDTOAsync(PostBaguetteDTO baguette);
+
+	/// <summary>
 	/// GetAll
 	/// </summary>
 	/// <returns></returns>
 	public Task<List<Baguette>> GetAllAsync();
+
+	/// <summary>
+	/// GetAllDTO
+	/// </summary>
+	/// <returns></returns>
+	public Task<List<GetAllBaguetteDTO>> GetAllDTOAsync();
 
 	/// <summary>
 	/// Search
