@@ -28,24 +28,27 @@ public class ClientRepository : IClientRepository
 
 	public async Task<List<Client>> GetAllClientsLikeNameAsync(string name)
 	{
-		return await _dbContext.Clients.Where
-			(c => c.Name.Contains(name))
+		return await _dbContext.Clients
+			.Include(c => c.Baguettes)
+			.Where(c => c.Name.Contains(name))
 			.ToListAsync();
 	}
 
 	public async Task<Client?> GetClientByIdAsync(int id)
 	{
-		return await _dbContext.Clients.FindAsync(id);
+		return await _dbContext.Clients
+			.Include(c => c.Baguettes)
+			.FirstAsync(c => c.Id == id);
 	}
 
 	public async Task UpdateClientAsync(Client client)
 	{
-		int updateResult = await _dbContext.Clients.Where
-			(b => b.Id == client.Id).ExecuteUpdateAsync
-		(
-			updates => updates.SetProperty(c => c.Name, client.Name)
-								.SetProperty(c => c.Address, client.Address)
-		);
+		int updateResult = await _dbContext.Clients
+			.Where(b => b.Id == client.Id)
+			.ExecuteUpdateAsync(updates => updates
+				.SetProperty(c => c.Name, client.Name)
+				.SetProperty(c => c.Address, client.Address)
+			);
 
 		if (updateResult == 0)
 		{

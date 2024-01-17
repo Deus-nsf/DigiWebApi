@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 using DigiWebApi.RoutesAndCRUD.Context;
 using DigiWebApi.RoutesAndCRUD.DTOs;
@@ -34,6 +35,11 @@ builder.Services.AddSwaggerGen(c =>
 	var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 	c.IncludeXmlComments(xmlPath);
 });
+// For Client -> Baguette, only Client includes Baguettes
+builder.Services.AddControllers().AddJsonOptions(x =>
+	x.JsonSerializerOptions.ReferenceHandler =
+	ReferenceHandler.IgnoreCycles
+);
 //builder.Services.AddAutoMapper(o =>
 //{
 //	o.CreateMap<GetAllBaguettesDTO, Baguette>();
@@ -87,5 +93,5 @@ app.Run();
 	Ajout des DTOs
 
 	reste a faire :
-	- simuler references circulaires dans les modeles
+	- transformer les relations entre modeles en 0, n / 0, n
  */

@@ -76,6 +76,15 @@ public class BakeryDbContext : DbContext
 			new Baguette()
 			{
 				Id = 3,
+				Name = "Brioche",
+				Description = "Fait majoritairement avec du beurre.",
+				Price = 1.20f,
+				Currency = "Euros",
+				ClientId = 1,
+			},
+			new Baguette()
+			{
+				Id = 4,
 				Name = "Pain sans gluten",
 				Description = "Ça existe au moins ?",
 				Price = 4.50f,

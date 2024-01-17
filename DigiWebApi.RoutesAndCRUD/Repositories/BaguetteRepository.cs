@@ -28,26 +28,29 @@ public class BaguetteRepository : IBaguetteRepository
 
 	public async Task<List<Baguette>> GetAllBaguettesLikeNameAsync(string name)
 	{
-		return await _dbContext.Baguettes.Where
-			(b => b.Name.Contains(name))
+		return await _dbContext.Baguettes
+			.Include(b => b.Client)
+			.Where(b => b.Name.Contains(name))
 			.ToListAsync();
 	}
 
 
 	public async Task<Baguette?> GetBaguetteByIdAsync(int id)
 	{
-		return await _dbContext.Baguettes.FindAsync(id);
+		return await _dbContext.Baguettes
+			.Include(b => b.Client)
+			.FirstAsync(b => b.Id == id);
 	}
 
 
 	public async Task UpdateBaguetteAsync(Baguette baguette)
 	{
-		int updateResult = await _dbContext.Baguettes.Where
-			(b => b.Id == baguette.Id).ExecuteUpdateAsync
-		(
-			updates => updates.SetProperty(b => b.Description, baguette.Description)
-								.SetProperty(b => b.Price, baguette.Price)
-		);
+		int updateResult = await _dbContext.Baguettes
+			.Where(b => b.Id == baguette.Id)
+			.ExecuteUpdateAsync(updates => updates				 
+				.SetProperty(b => b.Description, baguette.Description)
+				.SetProperty(b => b.Price, baguette.Price)
+			);
 
 		if (updateResult == 0)
 		{
