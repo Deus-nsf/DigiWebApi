@@ -93,5 +93,6 @@ app.Run();
 
 	reste a faire :
 	- donnees par defaut des tables de jointure (19/01/24)
-	- tests unitaires des repositories
+	- tests unitaires des repositories en mode DB en RAM
+	- Tester diff entre IActionResult et ActionResult<T> avec Swagger
  */
