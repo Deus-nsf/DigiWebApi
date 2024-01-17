@@ -29,7 +29,7 @@ public class BaguetteRepository : IBaguetteRepository
 	public async Task<List<Baguette>> GetAllBaguettesLikeNameAsync(string name)
 	{
 		return await _dbContext.Baguettes
-			.Include(b => b.Client)
+			.Include(b => b.Clients)
 			.Where(b => b.Name.Contains(name))
 			.ToListAsync();
 	}
@@ -38,7 +38,7 @@ public class BaguetteRepository : IBaguetteRepository
 	public async Task<Baguette?> GetBaguetteByIdAsync(int id)
 	{
 		return await _dbContext.Baguettes
-			.Include(b => b.Client)
+			.Include(b => b.Clients)
 			.FirstAsync(b => b.Id == id);
 	}
 

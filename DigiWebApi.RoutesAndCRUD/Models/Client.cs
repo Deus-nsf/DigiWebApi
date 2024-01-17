@@ -18,7 +18,8 @@ public class Client
 	public string Address { get; set; } = "123 rue de la Jean-Michelerie";
 
 	/// <summary>
-	/// ORM ONLY --- 0, n
+	/// Foreign Key --- 0, n
+	/// ORM ONLY
 	/// </summary>
 	public List<Baguette> Baguettes { get; set; } = new();
 }

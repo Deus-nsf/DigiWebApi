@@ -62,7 +62,11 @@ public class BakeryDbContext : DbContext
 				Description = "Du pain artisanal à la farine de blé complet.",
 				Price = 2.50f,
 				Currency = "Euros",
-				ClientId = 2,
+				//Clients = new List<Client>()
+				//{
+				//	clients[0],
+				//	clients[1]
+				//}
 			},
 			new Baguette()
 			{
@@ -71,7 +75,11 @@ public class BakeryDbContext : DbContext
 				Description = "Du pain artisanal à la farine blanche et plein de glucose !",
 				Price = 1.20f,
 				Currency = "Euros",
-				ClientId = 1,
+				//Clients = new List<Client>()
+				//{ 
+				//	clients[0],
+				//	clients[1]
+				//}
 			},
 			new Baguette()
 			{
@@ -80,7 +88,10 @@ public class BakeryDbContext : DbContext
 				Description = "Fait majoritairement avec du beurre.",
 				Price = 1.20f,
 				Currency = "Euros",
-				ClientId = 1,
+				//Clients = new List<Client>()
+				//{ 
+				//	clients[0]
+				//}
 			},
 			new Baguette()
 			{

@@ -35,7 +35,6 @@ builder.Services.AddSwaggerGen(c =>
 	var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 	c.IncludeXmlComments(xmlPath);
 });
-// For Client -> Baguette, only Client includes Baguettes
 builder.Services.AddControllers().AddJsonOptions(x =>
 	x.JsonSerializerOptions.ReferenceHandler =
 	ReferenceHandler.IgnoreCycles
@@ -93,5 +92,6 @@ app.Run();
 	Ajout des DTOs
 
 	reste a faire :
-	- transformer les relations entre modeles en 0, n / 0, n
+	- donnees par defaut des tables de jointure (19/01/24)
+	- tests unitaires des repositories
  */
