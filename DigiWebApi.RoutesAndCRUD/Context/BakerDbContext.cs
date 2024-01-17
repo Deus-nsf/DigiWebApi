@@ -9,8 +9,8 @@ namespace DigiWebApi.RoutesAndCRUD.Context;
 public class BakeryDbContext : DbContext
 {
 	// Entities/Models description
-	public DbSet<Baguette> Baguettes { get; set; }
 	public DbSet<Client> Clients { get; set; }
+	public DbSet<Baguette> Baguettes { get; set; }
 
 
 	// DB description

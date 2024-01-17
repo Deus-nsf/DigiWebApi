@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigiWebApi.RoutesAndCRUD.Migrations
 {
     [DbContext(typeof(BakeryDbContext))]
-    partial class BaguetteDbContextModelSnapshot : ModelSnapshot
+    partial class BakeryDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

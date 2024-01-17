@@ -4,6 +4,7 @@ using DigiWebApi.RoutesAndCRUD.Services.Contracts;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -36,6 +37,9 @@ public class ClientController : ControllerBase
 		}
 		catch (Exception ex)
 		{
+			while (ex.InnerException is not null)
+				ex = ex.InnerException;
+
 			return BadRequest(ex.Message);
 		}
 

@@ -23,10 +23,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BakeryDbContext>();
-builder.Services.AddScoped<IBaguetteRepository, BaguetteRepository>();
-builder.Services.AddScoped<IBaguetteService, BaguetteService>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IBaguetteRepository, BaguetteRepository>();
+builder.Services.AddScoped<IBaguetteService, BaguetteService>();
 builder.Services.AddSwaggerGen(c =>
 {
 	c.SwaggerDoc("v1", new OpenApiInfo { Title = "Bakery", Version = "v1" });

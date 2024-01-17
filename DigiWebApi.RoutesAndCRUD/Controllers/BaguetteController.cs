@@ -43,6 +43,9 @@ public class BaguetteController : ControllerBase
 		}
 		catch (Exception ex)
 		{
+			while (ex.InnerException is not null)
+				ex = ex.InnerException;
+
 			return BadRequest(ex.Message);
 		}
 
