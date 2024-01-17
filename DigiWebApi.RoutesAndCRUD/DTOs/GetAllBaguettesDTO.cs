@@ -2,7 +2,7 @@
 
 namespace DigiWebApi.RoutesAndCRUD.DTOs;
 
-public class GetAllBaguetteDTO
+public class GetAllBaguettesDTO
 {
 	public int Id { get; set; }
 

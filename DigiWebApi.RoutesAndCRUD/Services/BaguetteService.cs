@@ -44,16 +44,16 @@ public class BaguetteService : IBaguetteService
 	}
 
 
-	public async Task<List<GetAllBaguetteDTO>> GetAllDTOAsync()
+	public async Task<List<GetAllBaguettesDTO>> GetAllDTOAsync()
 	{
 		List<Baguette> baguettes = await _baguetteRepository.GetAllBaguettesAsync();
-		List<GetAllBaguetteDTO> getAllBaguetteDTOs = new();
+		List<GetAllBaguettesDTO> getAllBaguetteDTOs = new();
 
         foreach (Baguette baguette in baguettes)
         {
 			getAllBaguetteDTOs.Add
 			(
-				new GetAllBaguetteDTO()
+				new GetAllBaguettesDTO()
 				{
 					Id = baguette.Id,
 					Name = baguette.Name,

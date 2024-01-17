@@ -33,6 +33,8 @@ public class BaguetteController : ControllerBase
 	/// <param name="baguette"></param>
 	/// <returns></returns>
 	[HttpPost]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	public async Task<IActionResult> Post(Baguette baguette)
 	{
 		try
@@ -53,6 +55,8 @@ public class BaguetteController : ControllerBase
 	/// <param name="baguetteDto"></param>
 	/// <returns></returns>
 	[HttpPost]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	public async Task<IActionResult> PostDTO(PostBaguetteDTO baguetteDto)
 	{
 		try
@@ -68,7 +72,7 @@ public class BaguetteController : ControllerBase
 	}
 
 	/// <summary>
-	/// Get all delicious Baguettes
+	/// Get all the delicious Baguettes
 	/// </summary>
 	/// <returns></returns>
 	[HttpGet]
@@ -79,13 +83,14 @@ public class BaguetteController : ControllerBase
 		List<Baguette> baguettes = await _baguetteService.GetAllAsync();
 
 		if (baguettes.Count <= 0)
-			return NotFound($"Aucune baguette en base de donnée !");
+			return NoContent();
+		//return NotFound($"Aucune baguette en base de donnée !");
 		else
 			return Ok(baguettes);
 	}
 
 	/// <summary>
-	/// Get all delicious Baguettes (simplified form)
+	/// Get all the delicious Baguettes (simplified form)
 	/// </summary>
 	/// <returns></returns>
 	[HttpGet]
@@ -93,7 +98,7 @@ public class BaguetteController : ControllerBase
 	[ProducesResponseType(StatusCodes.Status204NoContent)]
 	public async Task<IActionResult> GetAllDTO()
 	{
-		List<GetAllBaguetteDTO> baguettes = await _baguetteService.GetAllDTOAsync();
+		List<GetAllBaguettesDTO> baguettes = await _baguetteService.GetAllDTOAsync();
 
 		if (baguettes.Count <= 0)
 			return NoContent();
@@ -109,14 +114,14 @@ public class BaguetteController : ControllerBase
 	/// <returns></returns>
 	[HttpGet("{name}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
-	[ProducesResponseType(StatusCodes.Status204NoContent)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	public async Task<IActionResult> Search(string name)
 	{
 		List<Baguette> baguettes = await _baguetteService.GetAllLikeNameAsync(name);
 
 		if (baguettes.Count <= 0)
-			return NoContent();
-		//return NotFound($"Aucune baguette contenant le nom {name}.");
+			return NotFound($"Aucune baguette contenant le nom {name}.");
+		//return NoContent();
 		else
 			return Ok(baguettes);
 	}
@@ -130,14 +135,14 @@ public class BaguetteController : ControllerBase
 	/// <returns></returns>
 	[HttpGet("{id}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
-	[ProducesResponseType(StatusCodes.Status204NoContent)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	public async Task<IActionResult> GetById(int id)
 	{
 		Baguette? baguette = await _baguetteService.GetByIdAsync(id);
 
 		if (baguette is null)
-			return NoContent();
-		//return NotFound($"Aucune baguette à l'identifiant {id}.");
+			return NotFound($"Aucune baguette à l'identifiant {id}.");
+		//return NoContent();
 		else
 			return Ok(baguette);
 	}
@@ -148,6 +153,8 @@ public class BaguetteController : ControllerBase
 	/// <param name="baguette">(Only Description and Price will be updated)</param>
 	/// <returns></returns>
 	[HttpPut]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	public async Task<IActionResult> Put(Baguette baguette)
 	{
 		try
@@ -172,6 +179,8 @@ public class BaguetteController : ControllerBase
 	/// <param name="id">Database identifier</param>
 	/// <returns></returns>
 	[HttpDelete("{id}")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	public async Task<IActionResult> Delete(int id)
 	{
 		try

@@ -31,7 +31,7 @@ public interface IBaguetteService
 	/// GetAllDTO
 	/// </summary>
 	/// <returns></returns>
-	public Task<List<GetAllBaguetteDTO>> GetAllDTOAsync();
+	public Task<List<GetAllBaguettesDTO>> GetAllDTOAsync();
 
 	/// <summary>
 	/// Search

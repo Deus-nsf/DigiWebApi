@@ -1,3 +1,5 @@
+using System.Reflection;
+
 using DigiWebApi.RoutesAndCRUD.Context;
 using DigiWebApi.RoutesAndCRUD.DTOs;
 using DigiWebApi.RoutesAndCRUD.Models;
@@ -7,6 +9,7 @@ using DigiWebApi.RoutesAndCRUD.Services;
 using DigiWebApi.RoutesAndCRUD.Services.Contracts;
 
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,10 +26,18 @@ builder.Services.AddScoped<IBaguetteRepository, BaguetteRepository>();
 builder.Services.AddScoped<IBaguetteService, BaguetteService>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddSwaggerGen(c =>
+{
+	c.SwaggerDoc("v1", new OpenApiInfo { Title = "Bakery", Version = "v1" });
+	// Set the comments path for the Swagger JSON and UI.
+	var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+	var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+	c.IncludeXmlComments(xmlPath);
+});
 //builder.Services.AddAutoMapper(o =>
 //{
-//	o.CreateMap<GetAllBaguetteDTO, Baguette>();
-//	o.CreateMap<Baguette, GetAllBaguetteDTO>();
+//	o.CreateMap<GetAllBaguettesDTO, Baguette>();
+//	o.CreateMap<Baguette, GetAllBaguettesDTO>();
 //});
 //builder.Services.AddCors(options =>
 //{
@@ -76,7 +87,5 @@ app.Run();
 	Ajout des DTOs
 
 	reste a faire :
-	- copier les commentaires et annotations en plus
-	de CLientController vers BaguetteController
 	- simuler references circulaires dans les modeles
  */
