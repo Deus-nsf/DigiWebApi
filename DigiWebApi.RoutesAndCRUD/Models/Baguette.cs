@@ -23,4 +23,14 @@ public class Baguette
 	[Required]
 	[StringLength(20)]
 	public string Currency { get; set; } = "Euros";
+
+	/// <summary>
+	/// Foreign Key --- 0, 1
+	/// </summary>
+	public int? ClientId { get; set; }
+	// (must always set ORM linked entity to nullable for EF Core)
+	/// <summary>
+	/// ORM ONLY
+	/// </summary>
+	public Client? Client { get; set; }
 }

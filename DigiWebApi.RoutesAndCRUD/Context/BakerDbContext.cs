@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
+
 namespace DigiWebApi.RoutesAndCRUD.Context;
 
 
@@ -9,6 +10,7 @@ public class BakeryDbContext : DbContext
 {
 	// Entities/Models description
 	public DbSet<Baguette> Baguettes { get; set; }
+	public DbSet<Client> Clients { get; set; }
 
 
 	// DB description
@@ -34,6 +36,23 @@ public class BakeryDbContext : DbContext
 	// DB configuration, default/initial data
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
+		Client[] clients = new Client[]
+		{
+			new Client()
+			{
+				Id = 1,
+				Name = "Marie Madelaine",
+				Address = "432 avenue de la Gourmandise"
+			},
+
+			new Client()
+			{
+				Id = 2,
+				Name = "Jean Michel",
+				Address = "123 rue de la Jean-Michelerie"
+			}
+		};
+
 		Baguette[] baguettes = new Baguette[]
 		{
 			new Baguette()
@@ -42,7 +61,8 @@ public class BakeryDbContext : DbContext
 				Name = "Pain complet",
 				Description = "Du pain artisanal à la farine de blé complet.",
 				Price = 2.50f,
-				Currency = "Euros"
+				Currency = "Euros",
+				ClientId = 2,
 			},
 			new Baguette()
 			{
@@ -50,7 +70,8 @@ public class BakeryDbContext : DbContext
 				Name = "Baguette tradition",
 				Description = "Du pain artisanal à la farine blanche et plein de glucose !",
 				Price = 1.20f,
-				Currency = "Euros"
+				Currency = "Euros",
+				ClientId = 1,
 			},
 			new Baguette()
 			{
@@ -59,9 +80,11 @@ public class BakeryDbContext : DbContext
 				Description = "Ça existe au moins ?",
 				Price = 4.50f,
 				Currency = "Euros"
+				// No Buyer
 			}
 		};
 
+		modelBuilder.Entity<Client>().HasData(clients);
 		modelBuilder.Entity<Baguette>().HasData(baguettes);
 
 		base.OnModelCreating(modelBuilder);

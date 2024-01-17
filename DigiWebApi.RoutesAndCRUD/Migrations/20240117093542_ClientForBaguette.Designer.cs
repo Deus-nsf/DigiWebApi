@@ -4,6 +4,7 @@ using DigiWebApi.RoutesAndCRUD.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigiWebApi.RoutesAndCRUD.Migrations
 {
     [DbContext(typeof(BakeryDbContext))]
-    partial class BaguetteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240117093542_ClientForBaguette")]
+    partial class ClientForBaguette
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -27,7 +27,11 @@ public class BaguetteController : ControllerBase
 		_baguetteService = baguetteService;
 	}
 
-
+	/// <summary>
+	/// Create a new Baguette
+	/// </summary>
+	/// <param name="baguette"></param>
+	/// <returns></returns>
 	[HttpPost]
 	public async Task<IActionResult> Post(Baguette baguette)
 	{
@@ -43,7 +47,11 @@ public class BaguetteController : ControllerBase
 		return Ok(baguette);
 	}
 
-
+	/// <summary>
+	/// Create a new Baguette (simplified form)
+	/// </summary>
+	/// <param name="baguetteDto"></param>
+	/// <returns></returns>
 	[HttpPost]
 	public async Task<IActionResult> PostDTO(PostBaguetteDTO baguetteDto)
 	{
@@ -59,7 +67,10 @@ public class BaguetteController : ControllerBase
 		return Ok(baguetteDto);
 	}
 
-
+	/// <summary>
+	/// Get all delicious Baguettes
+	/// </summary>
+	/// <returns></returns>
 	[HttpGet]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -73,7 +84,10 @@ public class BaguetteController : ControllerBase
 			return Ok(baguettes);
 	}
 
-
+	/// <summary>
+	/// Get all delicious Baguettes (simplified form)
+	/// </summary>
+	/// <returns></returns>
 	[HttpGet]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -88,7 +102,11 @@ public class BaguetteController : ControllerBase
 			return Ok(baguettes);
 	}
 
-
+	/// <summary>
+	/// Search a Baguette with a criteria
+	/// </summary>
+	/// <param name="name">The criteria</param>
+	/// <returns></returns>
 	[HttpGet("{name}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -105,6 +123,11 @@ public class BaguetteController : ControllerBase
 
 	// "{id}" pour passer en route
 	// des parametres plus proprement genre GetById/12 pour l'element 12
+	/// <summary>
+	/// Find a specific Baguette
+	/// </summary>
+	/// <param name="id">Database identifier</param>
+	/// <returns></returns>
 	[HttpGet("{id}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -119,7 +142,11 @@ public class BaguetteController : ControllerBase
 			return Ok(baguette);
 	}
 
-
+	/// <summary>
+	/// Update a Baguette's main parameters
+	/// </summary>
+	/// <param name="baguette">(Only Description and Price will be updated)</param>
+	/// <returns></returns>
 	[HttpPut]
 	public async Task<IActionResult> Put(Baguette baguette)
 	{
@@ -139,7 +166,11 @@ public class BaguetteController : ControllerBase
 		return Ok($"La baguette à l'identifiant {baguette.Id} à été mise à jour.");
 	}
 
-
+	/// <summary>
+	/// Delete a specific Baguette
+	/// </summary>
+	/// <param name="id">Database identifier</param>
+	/// <returns></returns>
 	[HttpDelete("{id}")]
 	public async Task<IActionResult> Delete(int id)
 	{

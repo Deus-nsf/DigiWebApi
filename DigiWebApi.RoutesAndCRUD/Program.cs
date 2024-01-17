@@ -21,6 +21,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BakeryDbContext>();
 builder.Services.AddScoped<IBaguetteRepository, BaguetteRepository>();
 builder.Services.AddScoped<IBaguetteService, BaguetteService>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IClientService, ClientService>();
 //builder.Services.AddAutoMapper(o =>
 //{
 //	o.CreateMap<GetAllBaguetteDTO, Baguette>();
@@ -64,5 +66,17 @@ app.Run();
 	Put
 	Delete
 
-	DTO est optionnelle
+	Rajouter une entité pour faire du 1-n
+	Faire un getById de votre entité avec un 
+	include pour chargé la ou les autres entités avec
+	Utiliser le ActionResult<T> a la place du 
+	IActionResult et tester pour voir l'openApi
+	Ajouter la génération XML et les /// sur les 
+	méthodes et tester pour voir l'openApi
+	Ajout des DTOs
+
+	reste a faire :
+	- copier les commentaires et annotations en plus
+	de CLientController vers BaguetteController
+	- simuler references circulaires dans les modeles
  */
