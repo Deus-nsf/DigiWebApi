@@ -15,6 +15,7 @@ public class BakeryDbContext : DbContext
 	public DbSet<Baguette> Baguettes { get; set; }
 
 
+	// Encapsulation breach to help for tests... (didn't help much)
 	public void OnConfiguringTestAccess(DbContextOptionsBuilder optionsBuilder)
 	{
 		OnConfiguring(optionsBuilder);

@@ -105,6 +105,25 @@ public class ClientController : ControllerBase
 	}
 
 	/// <summary>
+	/// Find a specific Client and returns it as a raw object
+	/// </summary>
+	/// <param name="id">Database identifier</param>
+	/// <returns></returns>
+	[HttpGet("{id}")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
+	public async Task<ActionResult<Client>> GetByIdReturnObject(int id)
+	{
+		Client? client = await _clientService.GetByIdAsync(id);
+
+		if (client is null)
+			return NotFound($"Aucun client à l'identifiant {id}.");
+		//return NoContent();
+		else
+			return Ok(client);
+	}
+
+	/// <summary>
 	/// Update a Client's main parameters
 	/// </summary>
 	/// <param name="client">(Only Name and Address will be updated)</param>
