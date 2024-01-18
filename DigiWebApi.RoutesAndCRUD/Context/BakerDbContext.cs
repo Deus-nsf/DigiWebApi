@@ -13,15 +13,21 @@ public class BakeryDbContext : DbContext
 	public DbSet<Baguette> Baguettes { get; set; }
 
 
+	public void OnConfiguringTestAccess(DbContextOptionsBuilder optionsBuilder)
+	{
+		OnConfiguring(optionsBuilder);
+	}
+
+
 	// DB description
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
-		optionsBuilder.UseSqlServer
-		(
-			"Data Source=(localdb)\\MSSQLLOCALDB;" +
-			"Initial Catalog=Bakery;" +
-			"Integrated Security=True"
-		);
+		//optionsBuilder.UseSqlServer
+		//(
+		//	"Data Source=(localdb)\\MSSQLLOCALDB;" +
+		//	"Initial Catalog=Bakery;" +
+		//	"Integrated Security=True"
+		//);
 
 #if DEBUG
 		optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Debug);

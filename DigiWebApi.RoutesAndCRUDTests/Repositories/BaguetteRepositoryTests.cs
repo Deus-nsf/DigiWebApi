@@ -10,7 +10,9 @@ using DigiWebApi.RoutesAndCRUD.Models;
 using Microsoft.EntityFrameworkCore;
 using DigiWebApi.RoutesAndCRUD.Context;
 
+
 namespace DigiWebApi.RoutesAndCRUD.Repositories.Tests;
+
 
 [TestClass()]
 public class BaguetteRepositoryTests
@@ -64,15 +66,25 @@ public class BaguetteRepositoryTests
 		Assert.IsTrue(numberOfRowsFound >= minNumberOfRows);
 	}
 
-
+	/// <summary>
+	/// I want to test my parameters checks for an Insert
+	/// </summary>
+	/// <returns></returns>
 	[TestMethod()]
 	[Timeout(3000)]
-	public void AddBaguetteAsyncTest()
+	public async Task AddBaguetteAsyncTest()
 	{
 		// Arrange
-		var optionsBuilder = new DbContextOptionsBuilder<BakeryDbContext>();
+		var context = new BakeryDbContext();
 
+			// Needs nuget package Microsoft.EntityFrameworkCore.InMemory
+		var optionsBuilder = new DbContextOptionsBuilder<BakeryDbContext>()
+									.UseInMemoryDatabase("Bakery");
 
+		context.OnConfiguringTestAccess(optionsBuilder);
+
+			// deletes in memory DB at each run
+		await context.Database.EnsureDeletedAsync();
 
 		// Act
 

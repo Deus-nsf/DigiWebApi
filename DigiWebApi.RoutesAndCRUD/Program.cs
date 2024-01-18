@@ -9,6 +9,7 @@ using DigiWebApi.RoutesAndCRUD.Repositories.Contracts;
 using DigiWebApi.RoutesAndCRUD.Services;
 using DigiWebApi.RoutesAndCRUD.Services.Contracts;
 
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
@@ -22,7 +23,15 @@ builder.Services.AddControllers();
 // https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<BakeryDbContext>();
+builder.Services.AddDbContext<BakeryDbContext>
+(
+	optionsBuilder => optionsBuilder.UseSqlServer
+	(
+		"Data Source=(localdb)\\MSSQLLOCALDB;" +
+		"Initial Catalog=Bakery;" +
+		"Integrated Security=True"
+	)
+);
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IBaguetteRepository, BaguetteRepository>();
@@ -94,6 +103,6 @@ app.Run();
 	reste a faire :
 	- donnees par defaut des tables de jointure (19/01/24)
 	- tests unitaires des repositories en mode DB en RAM (19/01/24)
-	- tests unitaires avec bouchonnage en untilisant le nuget Moq
+	- tests unitaires avec bouchonnage en untilisant le nuget Moq (19/01/24)
 	- Tester diff entre IActionResult et ActionResult<T> avec Swagger
  */

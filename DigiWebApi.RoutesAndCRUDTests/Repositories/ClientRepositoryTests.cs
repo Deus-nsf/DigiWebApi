@@ -11,7 +11,9 @@ using DigiWebApi.RoutesAndCRUD.Context;
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace DigiWebApi.RoutesAndCRUD.Repositories.Tests;
+
 
 [TestClass()]
 public class ClientRepositoryTests
@@ -51,7 +53,7 @@ public class ClientRepositoryTests
 	public async Task AddClientAsyncTest()
 	{
 		// Arrange
-		ClientRepository clientRepository = new();	
+		ClientRepository clientRepository = new();
 		int randomId = RandomNumberGenerator.GetInt32(500, 1001);
 		Client? client = new()
 		{
