@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DigiWebApi.RoutesAndCRUD.Models;
+using Microsoft.EntityFrameworkCore;
+using DigiWebApi.RoutesAndCRUD.Context;
 
 namespace DigiWebApi.RoutesAndCRUD.Repositories.Tests;
 
@@ -54,10 +56,28 @@ public class BaguetteRepositoryTests
 		int numberOfRowsFound = 0;
 
 		// Act
-		baguetteList = await baguetteRepository.GetAllBaguettesLikeNameAsync(searchCriteria);
+		baguetteList = await baguetteRepository
+							.GetAllBaguettesLikeNameAsync(searchCriteria);
 		numberOfRowsFound = baguetteList.Count;
 
 		// Assert
 		Assert.IsTrue(numberOfRowsFound >= minNumberOfRows);
+	}
+
+
+	[TestMethod()]
+	[Timeout(3000)]
+	public void AddBaguetteAsyncTest()
+	{
+		// Arrange
+		var optionsBuilder = new DbContextOptionsBuilder<BakeryDbContext>();
+
+
+
+		// Act
+
+
+		// Assert
+		Assert.Fail();
 	}
 }
