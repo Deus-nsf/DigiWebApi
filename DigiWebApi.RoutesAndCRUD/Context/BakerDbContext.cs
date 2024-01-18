@@ -1,4 +1,6 @@
-﻿using DigiWebApi.RoutesAndCRUD.Models;
+﻿using Castle.Components.DictionaryAdapter.Xml;
+
+using DigiWebApi.RoutesAndCRUD.Models;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -22,13 +24,20 @@ public class BakeryDbContext : DbContext
 	// DB description
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
-		//optionsBuilder.UseSqlServer
-		//(
-		//	"Data Source=(localdb)\\MSSQLLOCALDB;" +
-		//	"Initial Catalog=Bakery;" +
-		//	"Integrated Security=True"
-		//);
+		if (false) // How to check if the Database is in memory or not?
+		{
 
+		}
+		else
+		{
+			optionsBuilder.UseSqlServer
+			(
+				"Data Source=(localdb)\\MSSQLLOCALDB;" +
+				"Initial Catalog=Bakery;" +
+				"Integrated Security=True"
+			);
+		}
+		
 #if DEBUG
 		optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Debug);
 #else

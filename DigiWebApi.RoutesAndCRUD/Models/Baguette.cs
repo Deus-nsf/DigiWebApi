@@ -25,8 +25,7 @@ public class Baguette
 	public string Currency { get; set; } = "Euros";
 
 	/// <summary>
-	/// Foreign Key --- 0, n
-	/// ORM ONLY
+	/// ORM ONLY --- 0, n
 	/// </summary>
 	public List<Client> Clients { get; set; } = new();
 }
