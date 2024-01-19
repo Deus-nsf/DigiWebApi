@@ -101,7 +101,6 @@ app.Run();
 	Ajout des DTOs
 
 	reste a faire :
-	- donnees par defaut des tables de jointure (19/01/24)
 	- tests unitaires avec bouchonnage en utilisant le nuget Moq (19/01/24)
 	- Tester diff entre IActionResult et ActionResult<T> avec Swagger
 		-> fait (GetByIdReturnObject) mais pas trop compris la difference ?

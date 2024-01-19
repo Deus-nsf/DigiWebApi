@@ -17,7 +17,7 @@ namespace DigiWebApi.RoutesAndCRUD.Repositories.Tests;
 [TestClass()]
 public class BaguetteRepositoryTests
 {
-	private DbContextOptionsBuilder<BakeryDbContext> _optionsBuilder = 
+	private DbContextOptionsBuilder<BakeryDbContext> _optionsBuilder =
 		new DbContextOptionsBuilder<BakeryDbContext>().UseInMemoryDatabase("Bakery");
 
 	private BakeryDbContext _dbContext;
@@ -29,7 +29,7 @@ public class BaguetteRepositoryTests
 		_dbContext.Database.EnsureDeleted();
 		_dbContext.Database.EnsureCreated();
 	}
-	 
+
 
 	/// <summary>
 	/// I want my Baguette number 7 to exist in the real local Database
@@ -121,5 +121,46 @@ public class BaguetteRepositoryTests
 
 		// Assert
 		Assert.IsTrue(hasSucceded);
+	}
+
+	/// <summary>
+	/// I want to test my Price parameter check (should fail)
+	/// </summary>
+	/// <returns></returns>
+	[TestMethod()]
+	public async Task AddBaguetteAsyncTest1()
+	{
+		// Arrange
+		BaguetteRepository baguetteRepository = new(_dbContext);
+		bool hasFailed = false;
+
+		// Act
+		try
+		{
+			await baguetteRepository.AddBaguetteAsync
+			(
+				new Baguette
+				{
+					Id = 0, // EF Core will auto increment the Id if set to 0
+					Name = "Baguette en RAM nouvelle génération.",
+					Description = "Cette baguette est en 64 bits et c'est beaucoup trop.",
+					Price = 64.0f,	// <!> WORKS IN BACK END, ONLY FRONT END IS PROTECTED??
+					Currency = "bits",
+					// No Clients
+				}
+			);
+		}
+		catch (Exception ex)
+		{
+			while (ex.InnerException is not null)
+				ex = ex.InnerException;
+
+			await Console.Out.WriteLineAsync(ex.Message);
+
+			hasFailed = true;
+		}
+
+		// Assert
+		Assert.IsTrue(hasFailed);
 	}
 }
