@@ -17,6 +17,20 @@ namespace DigiWebApi.RoutesAndCRUD.Repositories.Tests;
 [TestClass()]
 public class BaguetteRepositoryTests
 {
+	private DbContextOptionsBuilder<BakeryDbContext> _optionsBuilder = 
+		new DbContextOptionsBuilder<BakeryDbContext>().UseInMemoryDatabase("Bakery");
+
+	private BakeryDbContext _dbContext;
+
+
+	public BaguetteRepositoryTests()
+	{
+		_dbContext = new(_optionsBuilder.Options);
+		_dbContext.Database.EnsureDeleted();
+		_dbContext.Database.EnsureCreated();
+	}
+	 
+
 	/// <summary>
 	/// I want my Baguette number 7 to exist in the real local Database
 	/// and have it's currency in Euros
@@ -27,7 +41,7 @@ public class BaguetteRepositoryTests
 	public async Task GetBaguetteByIdAsyncTest()
 	{
 		// Arrange
-		BaguetteRepository baguetteRepository = new();
+		BaguetteRepository baguetteRepository = new(_dbContext);
 		Baguette? baguette = null;
 		int id = 7;
 		string expectedCurrency = "Euros";
@@ -43,7 +57,7 @@ public class BaguetteRepositoryTests
 
 	/// <summary>
 	/// I want at least 3 Baguettes to exist in the real local Database
-	/// with the characters "pain" in their Name (case insensitive)
+	/// with the characters "pain" in their Name (case sensitive)
 	/// </summary>
 	/// <returns></returns>
 	[TestMethod()]
@@ -51,9 +65,9 @@ public class BaguetteRepositoryTests
 	public async Task GetAllBaguettesLikeNameAsyncTest()
 	{
 		// Arrange
-		BaguetteRepository baguetteRepository = new();
+		BaguetteRepository baguetteRepository = new(_dbContext);
 		List<Baguette> baguetteList = new();
-		string searchCriteria = "pain";
+		string searchCriteria = "Pain";
 		int minNumberOfRows = 3;
 		int numberOfRowsFound = 0;
 

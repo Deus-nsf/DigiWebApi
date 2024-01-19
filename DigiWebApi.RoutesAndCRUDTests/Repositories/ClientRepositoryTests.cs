@@ -18,6 +18,20 @@ namespace DigiWebApi.RoutesAndCRUD.Repositories.Tests;
 [TestClass()]
 public class ClientRepositoryTests
 {
+	private DbContextOptionsBuilder<BakeryDbContext> _optionsBuilder = 
+		new DbContextOptionsBuilder<BakeryDbContext>().UseInMemoryDatabase("Bakery");
+
+	private BakeryDbContext _dbContext;
+
+
+	public ClientRepositoryTests()
+	{
+		_dbContext = new(_optionsBuilder.Options);
+		_dbContext.Database.EnsureDeleted();
+		_dbContext.Database.EnsureCreated();
+	}
+	 
+
 	/// <summary>
 	/// I want my Client number 1 to exist in the real local Database
 	/// and have a filled Address of at least 12 characters.
@@ -28,7 +42,7 @@ public class ClientRepositoryTests
 	public async Task GetClientByIdAsyncTest()
 	{
 		// Arrange
-		ClientRepository clientRepository = new();
+		ClientRepository clientRepository = new(_dbContext);
 		Client? client = null;
 		int id = 1;
 		int addressFilled = 0;
@@ -53,7 +67,7 @@ public class ClientRepositoryTests
 	public async Task AddClientAsyncTest()
 	{
 		// Arrange
-		ClientRepository clientRepository = new();
+		ClientRepository clientRepository = new(_dbContext);
 		int randomId = RandomNumberGenerator.GetInt32(500, 1001);
 		Client? client = new()
 		{

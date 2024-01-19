@@ -10,7 +10,11 @@ namespace DigiWebApi.RoutesAndCRUD.Repositories;
 
 public class ClientRepository : IClientRepository
 {
-	private readonly BakeryDbContext _dbContext = new();
+	private readonly BakeryDbContext _dbContext;
+	public ClientRepository(BakeryDbContext dbContext)
+	{
+		_dbContext = dbContext;
+	}
 
 
 	public async Task AddClientAsync(Client client)

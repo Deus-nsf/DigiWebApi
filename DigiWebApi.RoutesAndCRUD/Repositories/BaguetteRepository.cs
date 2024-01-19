@@ -10,8 +10,11 @@ namespace DigiWebApi.RoutesAndCRUD.Repositories;
 
 public class BaguetteRepository : IBaguetteRepository
 {
-	private readonly BakeryDbContext _dbContext = new();
-
+	private readonly BakeryDbContext _dbContext;
+	public BaguetteRepository(BakeryDbContext dbContext)
+	{
+		_dbContext = dbContext;
+	}
 
 	public async Task AddBaguetteAsync(Baguette baguette)
 	{

@@ -15,30 +15,20 @@ public class BakeryDbContext : DbContext
 	public DbSet<Baguette> Baguettes { get; set; }
 
 
-	// Encapsulation breach to help for tests... (didn't help much)
-	public void OnConfiguringTestAccess(DbContextOptionsBuilder optionsBuilder)
-	{
-		OnConfiguring(optionsBuilder);
-	}
+	public BakeryDbContext(DbContextOptions<BakeryDbContext> options)
+		: base(options) { }
 
 
 	// DB description
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
-		if (false) // How to check if the Database is in memory or not?
-		{
+		//optionsBuilder.UseSqlServer
+		//(
+		//	"Data Source=(localdb)\\MSSQLLOCALDB;" +
+		//	"Initial Catalog=Bakery;" +
+		//	"Integrated Security=True"
+		//);
 
-		}
-		else
-		{
-			optionsBuilder.UseSqlServer
-			(
-				"Data Source=(localdb)\\MSSQLLOCALDB;" +
-				"Initial Catalog=Bakery;" +
-				"Integrated Security=True"
-			);
-		}
-		
 #if DEBUG
 		optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Debug);
 #else
@@ -113,6 +103,15 @@ public class BakeryDbContext : DbContext
 			{
 				Id = 4,
 				Name = "Pain sans gluten",
+				Description = "Ça existe au moins ?",
+				Price = 4.50f,
+				Currency = "Euros"
+				// No Buyer
+			},
+			new Baguette()
+			{
+				Id = 5,
+				Name = "Pain Test",
 				Description = "Ça existe au moins ?",
 				Price = 4.50f,
 				Currency = "Euros"

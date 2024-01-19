@@ -23,7 +23,15 @@ builder.Services.AddControllers();
 // https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<BakeryDbContext>();
+builder.Services.AddDbContext<BakeryDbContext>
+(
+	options => options.UseSqlServer
+	(
+		"Data Source=(localdb)\\MSSQLLOCALDB;" +
+		"Initial Catalog=Bakery;" +
+		"Integrated Security=True"
+	)
+);
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IBaguetteRepository, BaguetteRepository>();
