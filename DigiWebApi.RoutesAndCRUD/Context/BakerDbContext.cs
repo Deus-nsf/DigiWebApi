@@ -50,7 +50,6 @@ public class BakeryDbContext : DbContext
 				Name = "Marie Madelaine",
 				Address = "432 avenue de la Gourmandise"
 			},
-
 			new Client()
 			{
 				Id = 2,
@@ -67,12 +66,7 @@ public class BakeryDbContext : DbContext
 				Name = "Pain complet",
 				Description = "Du pain artisanal à la farine de blé complet.",
 				Price = 2.50f,
-				Currency = "Euros",
-				//Clients = new List<Client>()
-				//{
-				//	clients[0],
-				//	clients[1]
-				//}
+				Currency = "Euros"
 			},
 			new Baguette()
 			{
@@ -80,12 +74,7 @@ public class BakeryDbContext : DbContext
 				Name = "Baguette tradition",
 				Description = "Du pain artisanal à la farine blanche et plein de glucose !",
 				Price = 1.20f,
-				Currency = "Euros",
-				//Clients = new List<Client>()
-				//{ 
-				//	clients[0],
-				//	clients[1]
-				//}
+				Currency = "Euros"
 			},
 			new Baguette()
 			{
@@ -93,11 +82,7 @@ public class BakeryDbContext : DbContext
 				Name = "Brioche",
 				Description = "Fait majoritairement avec du beurre.",
 				Price = 1.20f,
-				Currency = "Euros",
-				//Clients = new List<Client>()
-				//{ 
-				//	clients[0]
-				//}
+				Currency = "Euros"
 			},
 			new Baguette()
 			{
@@ -106,7 +91,6 @@ public class BakeryDbContext : DbContext
 				Description = "Ça existe au moins ?",
 				Price = 4.50f,
 				Currency = "Euros"
-				// No Buyer
 			},
 			new Baguette()
 			{
@@ -115,12 +99,22 @@ public class BakeryDbContext : DbContext
 				Description = "Ça existe au moins ?",
 				Price = 4.50f,
 				Currency = "Euros"
-				// No Buyer
 			}
+		};
+
+		List<object> BaguetteClient = new List<object>()
+		{
+			// Marie Madelaine bought Baguette tradition and Brioche
+			new { ClientsId = 1, BaguettesId = 2 },
+			new { ClientsId = 1, BaguettesId = 3 },
+
+			// Jean Michel only bought Pain complet
+			new { ClientsId = 2, BaguettesId = 1 }
 		};
 
 		modelBuilder.Entity<Client>().HasData(clients);
 		modelBuilder.Entity<Baguette>().HasData(baguettes);
+		modelBuilder.Entity(nameof(BaguetteClient)).HasData(BaguetteClient);
 
 		base.OnModelCreating(modelBuilder);
 	}

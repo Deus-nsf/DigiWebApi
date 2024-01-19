@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigiWebApi.RoutesAndCRUD.Migrations
 {
     [DbContext(typeof(BakeryDbContext))]
-    [Migration("20240117173856_JoinTableClientBaguette")]
-    partial class JoinTableClientBaguette
+    [Migration("20240119144004_DefaultValuesBaguetteClient")]
+    partial class DefaultValuesBaguetteClient
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,23 @@ namespace DigiWebApi.RoutesAndCRUD.Migrations
                     b.HasIndex("ClientsId");
 
                     b.ToTable("BaguetteClient");
+
+                    b.HasData(
+                        new
+                        {
+                            BaguettesId = 2,
+                            ClientsId = 1
+                        },
+                        new
+                        {
+                            BaguettesId = 3,
+                            ClientsId = 1
+                        },
+                        new
+                        {
+                            BaguettesId = 1,
+                            ClientsId = 2
+                        });
                 });
 
             modelBuilder.Entity("DigiWebApi.RoutesAndCRUD.Models.Baguette", b =>
@@ -99,6 +116,14 @@ namespace DigiWebApi.RoutesAndCRUD.Migrations
                             Currency = "Euros",
                             Description = "Ça existe au moins ?",
                             Name = "Pain sans gluten",
+                            Price = 4.5f
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Currency = "Euros",
+                            Description = "Ça existe au moins ?",
+                            Name = "Pain Test",
                             Price = 4.5f
                         });
                 });

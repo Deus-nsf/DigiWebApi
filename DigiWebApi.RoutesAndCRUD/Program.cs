@@ -102,8 +102,8 @@ app.Run();
 
 	reste a faire :
 	- donnees par defaut des tables de jointure (19/01/24)
-	- tests unitaires des repositories en mode DB en RAM (19/01/24)
 	- tests unitaires avec bouchonnage en utilisant le nuget Moq (19/01/24)
 	- Tester diff entre IActionResult et ActionResult<T> avec Swagger
 		-> fait (GetByIdReturnObject) mais pas trop compris la difference ?
+		-> difference dans la generation OpenAPI (a revoir)
  */

@@ -3,6 +3,7 @@ using DigiWebApi.RoutesAndCRUD.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigiWebApi.RoutesAndCRUD.Migrations
 {
     [DbContext(typeof(BakeryDbContext))]
-    partial class BakeryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240117173856_JoinTableClientBaguette")]
+    partial class JoinTableBaguetteClient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,23 +37,6 @@ namespace DigiWebApi.RoutesAndCRUD.Migrations
                     b.HasIndex("ClientsId");
 
                     b.ToTable("BaguetteClient");
-
-                    b.HasData(
-                        new
-                        {
-                            BaguettesId = 2,
-                            ClientsId = 1
-                        },
-                        new
-                        {
-                            BaguettesId = 3,
-                            ClientsId = 1
-                        },
-                        new
-                        {
-                            BaguettesId = 1,
-                            ClientsId = 2
-                        });
                 });
 
             modelBuilder.Entity("DigiWebApi.RoutesAndCRUD.Models.Baguette", b =>
@@ -113,14 +99,6 @@ namespace DigiWebApi.RoutesAndCRUD.Migrations
                             Currency = "Euros",
                             Description = "Ça existe au moins ?",
                             Name = "Pain sans gluten",
-                            Price = 4.5f
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Currency = "Euros",
-                            Description = "Ça existe au moins ?",
-                            Name = "Pain Test",
                             Price = 4.5f
                         });
                 });

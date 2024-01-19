@@ -5,7 +5,7 @@
 namespace DigiWebApi.RoutesAndCRUD.Migrations
 {
     /// <inheritdoc />
-    public partial class JoinTableClientBaguette : Migration
+    public partial class JoinTableBaguetteClient : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
