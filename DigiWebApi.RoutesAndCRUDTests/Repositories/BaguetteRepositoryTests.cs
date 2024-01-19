@@ -85,51 +85,41 @@ public class BaguetteRepositoryTests
 	/// I want to test my parameters checks for an Insert
 	/// </summary>
 	/// <returns></returns>
-	//[TestMethod()]
-	//[Timeout(3000)]
-	//public async Task AddBaguetteAsyncTest()
-	//{
-	//	// Arrange
-	//	BakeryDbContext dbContext = new();
+	[TestMethod()]
+	[Timeout(3000)]
+	public async Task AddBaguetteAsyncTest()
+	{
+		// Arrange
+		BaguetteRepository baguetteRepository = new(_dbContext);
+		bool hasSucceded = false;
 
-	//	// Needs nuget package Microsoft.EntityFrameworkCore.InMemory
-	//	var optionsBuilder = new DbContextOptionsBuilder<BakeryDbContext>()
-	//								.UseInMemoryDatabase("Bakery");
+		// Act
+		try
+		{
+			await baguetteRepository.AddBaguetteAsync
+			(
+				new Baguette
+				{
+					Id = 0, // EF Core will auto increment the Id if set to 0
+					Name = "Baguette en RAM !",
+					Description = "Cette baguette est faite de zeros et de uns !",
+					Price = 3.2f,
+					Currency = "Bytes",
+					// No Clients
+				}
+			);
 
-	//	dbContext.OnConfiguringTestAccess(optionsBuilder);
+			hasSucceded = true;
+		}
+		catch (Exception ex)
+		{
+			while (ex.InnerException is not null)
+				ex = ex.InnerException;
 
-	//	// deletes in memory DB at each run
-	//	await dbContext.Database.EnsureDeletedAsync();
-	//	BaguetteRepository baguetteRepository = new();
-	//	bool hasSucceded = false;
+			await Console.Out.WriteLineAsync(ex.Message);
+		}
 
-	//	// Act
-	//	try
-	//	{
-	//		await baguetteRepository.AddBaguetteAsync
-	//		(
-	//			new Baguette
-	//			{
-	//				Id = 0, // EF Core will auto increment the Id if set to 0
-	//				Name = "Baguette en RAM !",
-	//				Description = "Cette baguette est faite de zeros et de uns !",
-	//				Price = 3.2f,
-	//				Currency = "Bytes",
-	//				// No Clients
-	//			}
-	//		);
-
-	//		hasSucceded = true;
-	//	}
-	//	catch (Exception ex)
-	//	{
-	//		while (ex.InnerException is not null)
-	//			ex = ex.InnerException;
-
-	//		await Console.Out.WriteLineAsync(ex.Message);
-	//	}
-
-	//	// Assert
-	//	Assert.IsTrue(hasSucceded);
-	//}
+		// Assert
+		Assert.IsTrue(hasSucceded);
+	}
 }
