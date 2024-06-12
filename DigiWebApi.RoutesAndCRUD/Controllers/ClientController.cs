@@ -99,7 +99,7 @@ public class ClientController : ControllerBase
 
 		if (client is null)
 			return NotFound($"Aucun client à l'identifiant {id}.");
-		//return NoContent();
+		//return NoContent(); //NoContent is a success code! (204)
 		else
 			return Ok(client);
 	}
